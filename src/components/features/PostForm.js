@@ -5,6 +5,8 @@ import 'react-quill/dist/quill.snow.css';
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useSelector } from 'react-redux';
+import { getAllCategories } from '../../Redux/categoriesRedux';
 
 
 
@@ -19,12 +21,15 @@ const PostForm = ({action, actionText, ...props}) => {
   const [content,setContent] = useState(props.content || '');
   const [contentError, setContentError] = useState(false);
   const [dateError, setDateError] = useState(false);
+  const [category, setCategory] = useState(props.category || '');
 
+  const categories = useSelector(state => getAllCategories(state));
+  
   const handleSubmit = () => {
     setContentError(!content)
     setDateError(!publishedDate)
     if(content && publishedDate) {
-      action({ title, author, publishedDate, shortDescription, content });
+      action({ title, author, publishedDate, shortDescription, content, category });
     }
   };
 
@@ -55,7 +60,7 @@ const PostForm = ({action, actionText, ...props}) => {
 
     <Form.Group className="mb-3" controlId="formPublishedDate">
       <Form.Label>Published</Form.Label>
-      <DatePicker selected={publishedDate} onChange={(date) => setPublishedDate(date)} />
+      <DatePicker selected={publishedDate} onChange={(date) => setPublishedDate(date)} dateFormat="dd/MM/yyyy" />
             {dateError && <small className="d-block form-text text-danger mt-2">Date can't be empty</small>}
     </Form.Group> 
 
@@ -77,6 +82,18 @@ const PostForm = ({action, actionText, ...props}) => {
       />
       {contentError && <small className="d-block form-text text-danger mt-2">Content can't be empty</small>}
     </Form.Group>
+    <Form.Group className="mb-3" controlId="formCategory">
+        <Form.Label>Category</Form.Label>
+        <Form.Control as="select" onChange={e => setCategory(e.target.value)}>
+          {categories.map(category =>
+            (<option key={category.id}
+                className="d-flex align-items-stretch" value={category.name}>
+                {category.name}
+            </option>
+            ))
+          }
+        </Form.Control>
+      </Form.Group>
 
     <Button variant="primary" type="submit">{actionText}</Button>
 
