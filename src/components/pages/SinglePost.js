@@ -8,7 +8,7 @@ import dateToStr from '../../utils/dateToStr';
 
 const SinglePost = () => {
   const { id } = useParams();
-  const postData = useSelector(state => getPostById(state, id));
+  const post = useSelector(state => getPostById(state, id));
 
 
   const [show, setShow] = useState(false);
@@ -19,29 +19,30 @@ const SinglePost = () => {
   const dispatch = useDispatch();
 
   const remove = () => {
-    dispatch( removePost (postData.id))
+    dispatch( removePost (post.id))
   };
 
 
 
-  if(!postData) return <Navigate to="/"/>
+  if(!post) return <Navigate to="/"/>
   return (
     <div>
     <article >
       <Row className="d-flex justify-content-between">
         <Col >
-          <h2>{postData.title}</h2>
+          <h2>{post.title}</h2>
         </Col>
         <Col>
-        <Link key={postData.id} to={`/post/edit/${postData.id}`}>
+        <Link key={post.id} to={`/post/edit/${post.id}`}>
           <Button variant="outline-info" className="m-3 ">Edit</Button>
         </Link>
           <Button variant="outline-danger" onClick={handleShow}>Delete</Button>
         </Col>
       </Row>
-      <h3><span>Author: </span>{postData.author}</h3>
-      <h4 className="mb-4">{dateToStr(postData.publishedDate)}</h4>
-        <p dangerouslySetInnerHTML={{ __html: postData.content }} />
+      <h3 className="mb-3">{post.author}</h3>
+        <h4 className="mb-4">{dateToStr(post.publishedDate)}</h4>
+        <p className="mb-4"><Link to={`/categories/${post.category}`}>{post.category}</Link></p>
+        <p dangerouslySetInnerHTML={{ __html: post.content }} />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Are you sure?</Modal.Title>

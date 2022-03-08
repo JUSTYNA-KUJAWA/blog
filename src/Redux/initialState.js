@@ -59,10 +59,7 @@ const initialState ={
         id: '4',
         name: 'Games'
       },
-      {
-        id: '5',
-        name: 'Books'
-      }
+      
     ]
   }
   

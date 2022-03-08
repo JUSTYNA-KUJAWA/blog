@@ -1,4 +1,4 @@
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button,Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getPostById } from '../../Redux/postsRedux';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,12 @@ import dateToStr from '../../utils/dateToStr';
 const PostCard = ({ id }) => {
 
     const post = useSelector(state => getPostById(state, id));
-
-    return (
+    
+    if(!post) return <h2>abc</h2>
+    
+    return ( 
+      <>
+      <Row xs={1} md={2} lg={3} className="g-4 mt-2"></Row>
       <Card>
         <Card.Body className="d-flex flex-column">
           <Card.Title className="mb-3">{post.title}</Card.Title>
@@ -21,6 +25,7 @@ const PostCard = ({ id }) => {
           </Link>
         </Card.Body>
       </Card>
+      </>
     )
   }
   
