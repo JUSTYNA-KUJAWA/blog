@@ -8,16 +8,16 @@ const Categories = () => {
   const categories = useSelector(state => getAllCategories(state));
 
   return (
-    <>
-      <h1>All Categories</h1>
-      <ul>
+    <section className="container mt-2 d-flex justify-content-center">
+    <div className="col-8">
+      <h3>All Categories</h3>
         {
           categories.map(category => (
-            <li key={category.id}><Link className="mt-auto" to={`/categories/${category.name}`}>{category.name}</Link></li>
+            <Link className="mt-auto list-group-item list-group-flush" to={`/categories/${category.name}`}>{category.name}</Link>
           ))
         }
-      </ul>
-    </>
+    </div>
+    </section>
   )
 }
 

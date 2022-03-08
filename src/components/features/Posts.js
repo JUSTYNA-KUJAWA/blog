@@ -9,8 +9,8 @@ const Posts = () => {
   const posts = useSelector(state => getAllPosts(state)) ;
 
   return (
-    <section>
-      <div className="d-flex justify-content-between">
+    <section  className="container ml-2">
+      <div className="ml-2 d-flex justify-content-between">
         <h2>All posts</h2>
         <Link className="mt-2" to={"/post/add"}>
         <Button variant="outline-primary">Add post</Button>

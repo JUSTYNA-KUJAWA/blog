@@ -8,12 +8,9 @@ const PostCard = ({ id }) => {
 
     const post = useSelector(state => getPostById(state, id));
     
-    if(!post) return <h2>abc</h2>
-    
     return ( 
-      <>
-      <Row xs={1} md={2} lg={3} className="g-4 mt-2"></Row>
-      <Card>
+      <div className="container d-flex justify-content-center">
+      <Card className=" col-12 mt-2 pl-3">
         <Card.Body className="d-flex flex-column">
           <Card.Title className="mb-3">{post.title}</Card.Title>
           <Card.Subtitle className="mt-2"><span className="fw-bold">Author: </span>{post.author}</Card.Subtitle>
@@ -25,7 +22,8 @@ const PostCard = ({ id }) => {
           </Link>
         </Card.Body>
       </Card>
-      </>
+      </div>
+      
     )
   }
   

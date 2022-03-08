@@ -13,21 +13,21 @@ const CategoryView = () => {
   
   if(posts.length === 0)
     return (
-        <div>
-        <h3>Category : {categoryName}</h3>
-        <p>No posts in this category</p>
+      <div className="container mt-2">
+        <h3 className="row mt-5">Category: {categoryName}</h3>
+        <p className="row mt-3">No posts in this category ...</p>
         </div>
     );
 
   return (
     <section>
-      <div className="d-flex justify-content-between">
-      <h3>Category : {categoryName}</h3>
+      <div className="container mt-2 ">
+      <h3>Category: {categoryName}</h3>
       </div>
       <Row xs={1} md={2} lg={3} className="g-4 mt-2">
       {
         posts.map(post => (
-          <Col key={post.id} className="d-flex align-items-stretch">
+          <Col key={post.id} className="col-3 d-flex align-items-stretch">
             <PostCard id={post.id}/>
           </Col>
         ))
